@@ -11,8 +11,8 @@ __author__ = 'ehanchrow@ine.com'
 
 import  ConfigParser
 from    beaker.cache          import CacheManager
-from    beaker.util           import parse_cache_config_options
-from    beakerfiddling.addone import addone
+from    beaker.util           import parse_cache_config_options, func_namespace
+from    beakerfiddling.addone import addone, _addone
 import  os
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -36,9 +36,7 @@ print(addone(9))
 # Now interrogate the cache -- see if it has values for 0 and 9 (it
 # should, of course).
 
-# TODO -- the leading underscore strongly suggests that I shouldn't be
-# accessing _arg_namespace.
-c = cache_manager.get_cache(addone._arg_namespace)
+c = cache_manager.get_cache(func_namespace(_addone))
 
 for n in range(10):
     print("{}: {}".format(n, "Present" if str(n) in c else "absent"))
