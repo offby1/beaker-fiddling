@@ -9,7 +9,15 @@ from __future__ import absolute_import
 
 __author__ = 'ehanchrow@ine.com'
 
-from beakerfiddling.addone import addone
+import  ConfigParser
+from    beaker.cache          import CacheManager
+from    beaker.util           import parse_cache_config_options
+from    beakerfiddling.addone import addone
+import  os
+
+c = ConfigParser.ConfigParser()
+c.read(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'development.ini'))
+CacheManager(**parse_cache_config_options(dict(c.items('app:main'))))
 
 print(addone(0))
 print(addone(0))

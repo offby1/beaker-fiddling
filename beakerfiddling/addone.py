@@ -7,9 +7,9 @@ from __future__ import absolute_import
 
 __author__ = 'eric.hanchrow@gmail.com'
 
-from beakerfiddling import cache_manager
+from beaker import cache
 
-@cache_manager.cache('something')
+@cache.cache_region('region1')
 def addone(x):
     print("Laboriously computing result for arg {}".format(x))
     return x + 1
