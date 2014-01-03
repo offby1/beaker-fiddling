@@ -32,3 +32,13 @@ print(addone(0))
 
 print(addone(9))
 print(addone(9))
+
+# Now interrogate the cache -- see if it has values for 0 and 9 (it
+# should, of course).
+
+# TODO -- the leading underscore strongly suggests that I shouldn't be
+# accessing _arg_namespace.
+c = cache_manager.get_cache(addone._arg_namespace)
+
+for n in range(10):
+    print("{}: {}".format(n, "Present" if str(n) in c else "absent"))
