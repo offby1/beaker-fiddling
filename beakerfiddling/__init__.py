@@ -1,5 +1,8 @@
 from pyramid.config import Configurator
 
+from beaker.cache import CacheManager
+from beaker.util import parse_cache_config_options
+cache_manager = CacheManager(**parse_cache_config_options({'cache.type': 'memory'}))
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
