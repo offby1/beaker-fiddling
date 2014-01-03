@@ -10,8 +10,13 @@ __author__ = 'eric.hanchrow@gmail.com'
 from beaker import cache
 
 
-def _addone(x):
+def my_decorator(f):
+    decorated = cache.cache_region('region1')(f)
+    decorated.original_function = f
+    return decorated
+
+
+@my_decorator
+def addone(x):
     print("Laboriously computing result for arg {}".format(x))
     return x + 1
-
-addone = cache.cache_region('region1')(_addone)
