@@ -15,8 +15,9 @@ from    beaker.util           import parse_cache_config_options
 from    beakerfiddling.addone import addone
 import  os
 
-c = ConfigParser.ConfigParser()
-c.read(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'development.ini'))
+here = os.path.dirname(os.path.abspath(__file__))
+c = ConfigParser.ConfigParser(defaults={'here': here})
+c.read(os.path.join(here, 'development.ini'))
 CacheManager(**parse_cache_config_options(dict(c.items('app:main'))))
 
 print(addone(0))
