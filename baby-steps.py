@@ -18,7 +18,7 @@ import  os
 here = os.path.dirname(os.path.abspath(__file__))
 c = ConfigParser.ConfigParser(defaults={'here': here})
 c.read(os.path.join(here, 'development.ini'))
-CacheManager(**parse_cache_config_options(dict(c.items('app:main'))))
+cache_manager = CacheManager(**parse_cache_config_options(dict(c.items('app:main'))))
 
 print(addone(0))
 print(addone(0))
@@ -26,6 +26,7 @@ print(addone(0))
 print(addone(9))
 print(addone(9))
 
+cache_manager.region_invalidate(addone, 'region1', 0)
 print(addone(0))
 print(addone(0))
 
